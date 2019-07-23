@@ -5,29 +5,10 @@
  */
 package DataCompression;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+import javax.swing.*;
 
 /**
  *
@@ -40,7 +21,7 @@ public class TextCompression extends javax.swing.JFrame {
      */
     public TextCompression() {
         initComponents();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("..\\SourceImages\\logo.png")));
     }
 
     /**
@@ -63,6 +44,7 @@ public class TextCompression extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -124,17 +106,9 @@ public class TextCompression extends javax.swing.JFrame {
         jLabel3.setText("Compress");
         jLabel3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 210, 201)));
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jLabel3FocusGained(evt);
-            }
-        });
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel3MouseEntered(evt);
             }
         });
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 213, 40));
@@ -156,10 +130,11 @@ public class TextCompression extends javax.swing.JFrame {
         jLabel11.setBackground(new java.awt.Color(142, 210, 201));
         jLabel11.setFont(new java.awt.Font("Minion Pro SmBd", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(142, 210, 201));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Text Compression");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 190, 40));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DataCompression/Comp.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SourceImages/Comp.png"))); // NOI18N
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 150, 150));
 
         jLabel13.setForeground(new java.awt.Color(142, 210, 201));
@@ -170,7 +145,7 @@ public class TextCompression extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Lato", 0, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(142, 210, 201));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Exit");
+        jLabel18.setText("Back");
         jLabel18.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 210, 201)));
         jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -187,6 +162,13 @@ public class TextCompression extends javax.swing.JFrame {
         jLabel19.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 210, 201)));
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
+
+        jLabel20.setBackground(new java.awt.Color(142, 210, 201));
+        jLabel20.setFont(new java.awt.Font("Minion Pro SmBd", 0, 16)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(142, 210, 201));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Huffman Encoding");
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 30, -1, 481));
 
@@ -341,14 +323,6 @@ public class TextCompression extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLabel3FocusGained
-           
-    }//GEN-LAST:event_jLabel3FocusGained
-
-    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
-       
-    }//GEN-LAST:event_jLabel3MouseEntered
     
     //compression
     String log="";
@@ -417,11 +391,9 @@ public class TextCompression extends javax.swing.JFrame {
 	return sb.toString();
     }
     void testHuffman(String originalString){
-        log+=jTextArea1.getText();
-        log+="\n* Building Huffman Tree and Code Tables...";
+        log+=jTextArea1.getText()+"\n* Building Huffman Tree and Code Tables...";
 	Huffman h = new Huffman(originalString);
-	log+=("\n DONE");
-	log+=("\n============= Word Frequency =============");
+	log+=("\n DONE\n============= Word Frequency =============");
         for (Map.Entry<Character, Integer> entry: h.freq.entrySet()){
             String key = entry.getKey().toString();
             int val = entry.getValue();
@@ -440,12 +412,8 @@ public class TextCompression extends javax.swing.JFrame {
         log+=("\n* Encoding the text...");
 	String encoded = h.encode();
         log+=("\nDone");
-	decoded = h.decode();
         writeBinary(encoded,savepath.getText());
         writeCodeTable(h,savepath.getText());
-        if(!originalString.equals(decoded)){    // Check if original text and decoded text is exactly same
-            System.out.println("Failed to Encode, Encountered an Error");
-	}
 	double sl = originalString.length() * 8 ;
 	double el = encoded.length();
 	jLabel10.setText("Original string cost = " + (int)sl + " bits") ;
@@ -539,6 +507,11 @@ public class TextCompression extends javax.swing.JFrame {
         jLabel14.setVisible(false);
         jLabel16.setVisible(false);
         jLabel17.setVisible(false);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            System.out.println(""+ex);
+        } 
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -583,7 +556,8 @@ public class TextCompression extends javax.swing.JFrame {
 	return h;
 	}
     String readBinary(String path){
-        String binary_str="",f="";
+        String f="";
+        StringBuilder binary_str = new StringBuilder("");
 	try(InputStream inputStream = new FileInputStream(path)){
             int byteRead;
             while ((byteRead = inputStream.read()) != -1) { 
@@ -595,9 +569,9 @@ public class TextCompression extends javax.swing.JFrame {
 			padding_bits+="0";
 			extra_len--;
                     }
-                binar=padding_bits+binar;
+                    binar=padding_bits+binar;
                 }
-		binary_str += binar;
+		binary_str.append(binar);
             }
             int n=binary_str.length();
             f=binary_str.substring(0,n-8);
@@ -607,7 +581,7 @@ public class TextCompression extends javax.swing.JFrame {
                 if(k.charAt(j)=='1')break;
             }
             k=k.substring(j, 8);
-            System.out.println(""+k);
+            //System.out.println(""+k);
             f=f+k;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -675,7 +649,8 @@ public class TextCompression extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
-        System.exit(0);
+        this.setVisible(false);
+        new Main.Main().setVisible(true);
     }//GEN-LAST:event_jLabel18MouseClicked
 
     /**
@@ -710,6 +685,7 @@ public class TextCompression extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
